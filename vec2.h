@@ -11,7 +11,9 @@ enum Direction : int {
 ,	dir_down
 };
 
-constexpr double pi () { return acos(-1); }
+//constexpr double pi () { return acos(-1); }
+// cross-platform pi constant
+constexpr double pi = 3.14159265358979323846;
 
 // kd: oh no oh no oh no oh no I forgot computer scientists are allergic to maths. If you're a
 // mathematician, have a laugh with me at their inferiority. If you're neither, have a laugh at your
@@ -21,8 +23,8 @@ struct Vec2 {
 	Vec2 (double x_, double y_);
 	Vec2 (const Vec2& v);
 	
-	static constexpr double deg_to_rad = pi() / 180;
-	static constexpr double rad_to_deg = 180 / pi();
+	static constexpr double deg_to_rad = pi / 180;
+	static constexpr double rad_to_deg = 180 / pi;
 	
 	Vec2 operator = (const Vec2& v);
 	// Vec2 operator * (const Vec2& v, double f) const { return Vec2(f * v.x, f * v.y); }
