@@ -11,7 +11,6 @@ enum Direction : int {
 ,	dir_down
 };
 
-//constexpr double pi () { return acos(-1); }
 // cross-platform pi constant
 constexpr double pi = 3.14159265358979323846;
 

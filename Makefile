@@ -18,7 +18,6 @@
 
 CXX := g++
 
-
 mega_debug_flag :=
 mega_test_dir := tests/
 mega_graphics_def := -Dmega_GRAPHICS_DIR "megaman/graphics"
