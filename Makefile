@@ -57,7 +57,11 @@ megamega:
 	g++ $(make_mega_obj) stage_select.cpp -o stage_select.o $(mega_sdl)
 
 lodepng/clone:
-	cd .. && git clone https://github.com/lvandeve/lodepng
+	if [ ! -d "../lodepng" ]; then \
+		cd .. && git clone https://github.com/lvandeve/lodepng; \
+	else \
+		echo "lodepng already exists. Skipping clone."; \
+	fi
 
 lodepng/make:
 	cd ../lodepng && make pngdetail	
