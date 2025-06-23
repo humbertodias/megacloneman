@@ -12,7 +12,12 @@
 # optimisation flags can go on make_mega_exe.
 
 # When linker errors about the main function occur, the DSDL_MAIN_HANDLED flag might be funny.
+
+# full compilation command:
+# make lodepng/clone lodepng/make megamega_rest
+
 CXX := g++
+
 
 mega_debug_flag :=
 mega_test_dir := tests/
