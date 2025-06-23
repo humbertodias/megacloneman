@@ -1,5 +1,5 @@
 #include "game_data.h"
-#include "sdl.h"
+#include "SDL.h"
 #include <iostream>
 
 GameData::GameData () : game_input(play_inputs::count), rng_dev(std::random_device {} ()), settings("mega_settings.txt") {
