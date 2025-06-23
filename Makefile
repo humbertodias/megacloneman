@@ -22,29 +22,46 @@ mega_lodepng_cpp := ../lodepng/lodepng.cpp
 mega_objects = $(wildcard *.o)
 make_mega_obj := $(mega_debug_flag) -Wall -std=c++17 -c -O0
 make_mega_exe := $(mega_debug_flag) -Wall -std=c++17 -O0
+mega_exe := mega_game.exe
+
+UNAME_S := $(shell uname -s)
+ifeq ($(filter $(UNAME_S),Linux Darwin),$(UNAME_S))
+    mega_sdl := `sdl2-config --cflags --libs`
+endif
+
 
 # SKILL ISSUE (yeah idk but if it works it works)
 
 megamega_rest:
-#	g++ $(make_mega_obj) vec2.cpp -o vec2.o
-#	g++ $(make_mega_obj) hp_bar.cpp -o hp_bar.o $(mega_sdl)
-#	g++ $(make_mega_obj) level_rooms.cpp -o level_rooms.o $(mega_sdl)
-#	g++ $(make_mega_obj) actors.cpp -o actors.o $(mega_sdl)
-#	g++ $(make_mega_obj) items.cpp -o items.o $(mega_sdl)
-#	g++ $(make_mega_obj) projectiles.cpp -o projectiles.o $(mega_sdl)
-#	g++ $(make_mega_obj) inputs.cpp -o inputs.o
-#	g++ $(make_mega_obj) tiles.cpp -o tiles.o
+	g++ $(make_mega_obj) vec2.cpp -o vec2.o
+	g++ $(make_mega_obj) hp_bar.cpp -o hp_bar.o $(mega_sdl)
+	g++ $(make_mega_obj) level_rooms.cpp -o level_rooms.o $(mega_sdl)
+	g++ $(make_mega_obj) actors.cpp -o actors.o $(mega_sdl)
+	g++ $(make_mega_obj) items.cpp -o items.o $(mega_sdl)
+	g++ $(make_mega_obj) projectiles.cpp -o projectiles.o $(mega_sdl)
+	g++ $(make_mega_obj) inputs.cpp -o inputs.o
+	g++ $(make_mega_obj) tiles.cpp -o tiles.o
 	g++ $(make_mega_obj) player_chara.cpp -o player_chara.o $(mega_sdl)
 	g++ $(make_mega_obj) settings_file.cpp -o settings_file.o
 	g++ $(make_mega_obj) game_data.cpp -o game_data.o $(mega_sdl) $(mega_sdl)
 	g++ $(make_mega_obj) backend_sdl.cpp -o backend_sdl.o $(mega_lodepng) $(mega_sdl)
 	g++ $(make_mega_obj) $(mega_lodepng_cpp) -o lodepng.o $(mega_lodepng)
-	g++ $(make_mega_exe) vec2.o hp_bar.o level_rooms.o actors.o items.o settings_file.o projectiles.o inputs.o tiles.o player_chara.o game_data.o backend_sdl.o lodepng.o main.cpp -o mega_game.exe -Wall -std=c++17 $(mega_lodepng) $(mega_sdl) -DSDL_MAIN_HANDLED
-	mega_game.exe
+	g++ $(make_mega_exe) vec2.o hp_bar.o level_rooms.o actors.o items.o settings_file.o projectiles.o inputs.o tiles.o player_chara.o game_data.o backend_sdl.o lodepng.o main.cpp -o ${mega_exe} -Wall -std=c++17 $(mega_lodepng) $(mega_sdl) -DSDL_MAIN_HANDLED
+	./${mega_exe}
 	
 megamega_settings_test:
 	g++ $(make_mega_obj) settings_file.cpp -o settings_file.o -I
-	g++ $(mega_test_dir)settings.cpp settings_file.o -Wall -std=c++17 -o settings_test -I
+	g++ $(mega_test_dir) settings.cpp settings_file.o -Wall -std=c++17 -o settings_test -I
 	
 megamega:
 	g++ $(make_mega_obj) stage_select.cpp -o stage_select.o $(mega_sdl)
+
+lodepng/clone:
+	cd .. && git clone https://github.com/lvandeve/lodepng
+
+lodepng/make:
+	cd ../lodepng && make pngdetail	
+
+clean:
+	rm -f *.o
+	rm -f ${mega_exe}
