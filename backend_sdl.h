@@ -1,7 +1,7 @@
 #ifndef BACKEND_SDL_H
 #define BACKEND_SDL_H
 
-#include "sdl.h"
+#include "SDL.h"
 #include "vec2.h"
 #include <vector>
 #include <unordered_map>
